@@ -96,7 +96,7 @@ public class GameWindowManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        SetDefaultWindowState();
+        //SetDefaultWindowState();
 
         if (!editorMode)
         {
@@ -173,7 +173,11 @@ public class GameWindowManager : MonoBehaviour
 
         uint flags = SWP_NOSIZE | SWP_NOZORDER | SWP_SHOWWINDOW;
 
+        print($"Window Desired Pos: {x} {y}");
+
         Vector2Int winPos = ClampWindowPos(x, y);
+
+        print($"Window Clamped Pos: {winPos}");
 
         instance.windowPos = winPos;
 
@@ -188,6 +192,8 @@ public class GameWindowManager : MonoBehaviour
             return;
 
         Vector2Int windowSize = GetWindowSize();
+
+        print($"Window Size: {windowSize}");
 
         x -= windowSize.x / 2;
         y -= windowSize.y / 2;
@@ -219,7 +225,11 @@ public class GameWindowManager : MonoBehaviour
         instance.windowSize.x = width;
         instance.windowSize.y = height;
 
-        winPos = ClampWindowPos(winPos);
+        Vector2Int clampedPos = ClampWindowPos(winPos);
+        if (dx < 0)
+            winPos.x = clampedPos.x;
+        if (dy < 0)
+            winPos.y = clampedPos.y;
 
         instance.windowPos = winPos;
 
@@ -230,6 +240,8 @@ public class GameWindowManager : MonoBehaviour
     public static void CenterWindow() 
     {
         Vector2Int centerPos = GetScreenCenterPos();
+
+        print($"Center Pos: {centerPos}");
 
         SetWindowCenterPos(centerPos.x, centerPos.y);
     }
@@ -245,6 +257,7 @@ public class GameWindowManager : MonoBehaviour
         {
             Vector2Int screenSize = GetScreenSize();
             SetWindowSize(screenSize.x + 16, screenSize.y + 8);
+            print($"Default Window Pos: {GetWindowPos()}");
             //SetWindowSize(screenSize.x, screenSize.y - 2);
         }
         else
@@ -252,6 +265,7 @@ public class GameWindowManager : MonoBehaviour
             SetWindowSize(defaultWindowSize.x, defaultWindowSize.y);
         }
         CenterWindow();
+        print($"After Center: {GetWindowPos()}");
     }
 
     private Rect GetWindowRect()
@@ -299,15 +313,32 @@ public class GameWindowManager : MonoBehaviour
 
     private static Vector2Int ClampWindowPos(int x, int y) 
     {
-        Vector2Int screenBounds = GetScreenSize() - GetWindowSize();
+        Vector2Int windowSize = GetWindowSize();
+        Vector2Int screenBounds = GetScreenSize() - windowSize;
 
         Vector2Int clampedPos = new Vector2Int(x, y);
 
-        clampedPos.x = Mathf.Max(0, clampedPos.x);
-        clampedPos.x = Mathf.Min(clampedPos.x, screenBounds.x);
+        if (screenBounds.x > 0) 
+        {
+            clampedPos.x = Mathf.Max(0, clampedPos.x);
+            clampedPos.x = Mathf.Min(clampedPos.x, screenBounds.x);
+        }
+        else 
+        {
+            clampedPos.x = screenBounds.x / 2;
+        }
 
-        clampedPos.y = Mathf.Max(0, clampedPos.y);
-        clampedPos.y = Mathf.Min(clampedPos.y, screenBounds.y);
+        if (screenBounds.y > 0)
+        {
+            clampedPos.y = Mathf.Max(0, clampedPos.y);
+            clampedPos.y = Mathf.Min(clampedPos.y, screenBounds.y);
+        }
+        else 
+        {
+            clampedPos.y = screenBounds.y / 2;
+        }
+
+        print($"Clamped Pos: {clampedPos}");
 
         return clampedPos;
     }
