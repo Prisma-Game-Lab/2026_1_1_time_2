@@ -33,11 +33,14 @@ public class GameWindowManager : MonoBehaviour
 
     public static GameWindowManager instance;
 
+    [SerializeField] private bool fullScreenWindow;
     [SerializeField] private Vector2Int defaultWindowSize;
 
     //True means starting drag
     //False means ending drag
     [SerializeField] public UnityEvent<bool> OnWindowDragging;
+    [SerializeField] public UnityEvent<int, int> OnWindowPosChange;
+    [SerializeField] public UnityEvent<int, int> OnWindowSizeChange;
 
     private IntPtr windowHandler;
     private IntPtr originalWindowProcessor;
@@ -45,6 +48,10 @@ public class GameWindowManager : MonoBehaviour
 
     private bool editorMode;
     private bool draggingWindow;
+
+    private Vector2Int windowSize = -Vector2Int.one;
+    private Vector2Int windowPos = -Vector2Int.one;
+    private Vector2Int screenCenterPos = -Vector2Int.one;
 
     private struct Rect
     {
@@ -71,27 +78,39 @@ public class GameWindowManager : MonoBehaviour
 
         windowHandler = GetActiveWindow();
 
-        const int GWLP_WNDPROC = -4;
+        if (!editorMode) 
+        {
+            const int GWLP_WNDPROC = -4;
+            
+            newWindowProcessor = CustomWindowProcessor;
+            originalWindowProcessor = SetWindowLongPtr(windowHandler, GWLP_WNDPROC,
+                                                       Marshal.GetFunctionPointerForDelegate(newWindowProcessor));
+        }
 
-        newWindowProcessor = CustomWindowProcessor;
-        originalWindowProcessor = SetWindowLongPtr(windowHandler, GWLP_WNDPROC,
-                                                   Marshal.GetFunctionPointerForDelegate(newWindowProcessor));
+        windowSize = GetWindowSize();
+        windowPos = GetWindowPos();
+        screenCenterPos = GetScreenCenterPos();
 
-        SetWindowSize(defaultWindowSize.x, defaultWindowSize.y);
-        CenterWindow();
+        SetDefaultWindowState();
     }
 
     private void OnDestroy()
     {
-        SetWindowSize(defaultWindowSize.x, defaultWindowSize.y);
+        SetDefaultWindowState();
 
-        const int GWLP_WNDPROC = -4;
+        if (!editorMode)
+        {
+            const int GWLP_WNDPROC = -4;
 
-        SetWindowLongPtr(windowHandler, GWLP_WNDPROC, originalWindowProcessor);
+            SetWindowLongPtr(windowHandler, GWLP_WNDPROC, originalWindowProcessor);
+        }
     }
 
     public static Vector2Int GetWindowPos()
     {
+        //if (instance.windowPos != -Vector2Int.one)
+        //    return instance.windowPos;
+
         Rect windowRect = instance.GetWindowRect();
 
         Vector2Int pos = new Vector2Int(windowRect.Left, windowRect.Top);
@@ -99,8 +118,34 @@ public class GameWindowManager : MonoBehaviour
         return pos;
     }
 
+    public static Vector2Int GetWindowCenterPos()
+    {
+        Rect windowRect = instance.GetWindowRect();
+
+        Vector2Int pos = new Vector2Int(windowRect.Left, windowRect.Top);
+
+        pos.x += (windowRect.Right - windowRect.Left) / 2;
+        pos.y += (windowRect.Bottom - windowRect.Top) / 2;
+
+        return pos;
+    }
+
+    public static Vector2Int GetScreenCenterPos() 
+    {
+        //if (instance.screenCenterPos != -Vector2Int.one)
+        //    return instance.screenCenterPos;
+
+        Vector2Int pos = GetScreenSize();
+        pos /= 2;
+
+        return pos;
+    }
+
     public static Vector2Int GetWindowSize()
     {
+        //if (instance.windowSize != -Vector2Int.one)
+        //    return instance.windowSize;
+
         Rect windowRect = instance.GetWindowRect();
 
         Vector2Int size = new Vector2Int();
@@ -111,6 +156,16 @@ public class GameWindowManager : MonoBehaviour
         return size;
     }
 
+    public static Vector2Int GetScreenSize()
+    {
+        int screenWidth = Screen.currentResolution.width;
+        int screenHeight = Screen.currentResolution.height;
+
+        Vector2Int screenSize = new Vector2Int(screenWidth, screenHeight);
+
+        return screenSize;
+    }
+
     public static void SetWindowPos(int x, int y)
     {
         if (instance.editorMode || instance.draggingWindow)
@@ -118,7 +173,26 @@ public class GameWindowManager : MonoBehaviour
 
         uint flags = SWP_NOSIZE | SWP_NOZORDER | SWP_SHOWWINDOW;
 
-        SetWindowPos(instance.windowHandler, 0, x, y, 0, 0, flags);
+        Vector2Int winPos = ClampWindowPos(x, y);
+
+        instance.windowPos = winPos;
+
+        SetWindowPos(instance.windowHandler, 0, winPos.x, winPos.y, 0, 0, flags);
+
+        instance.OnWindowPosChange.Invoke(winPos.x, winPos.y);
+    }
+
+    public static void SetWindowCenterPos(int x, int y)
+    {
+        if (instance.editorMode || instance.draggingWindow)
+            return;
+
+        Vector2Int windowSize = GetWindowSize();
+
+        x -= windowSize.x / 2;
+        y -= windowSize.y / 2;
+
+        SetWindowPos(x, y);
     }
 
     public static void SetWindowSize(int width, int height)
@@ -142,21 +216,42 @@ public class GameWindowManager : MonoBehaviour
         winPos.x += dx;
         winPos.y += dy;
 
+        instance.windowSize.x = width;
+        instance.windowSize.y = height;
+
+        winPos = ClampWindowPos(winPos);
+
+        instance.windowPos = winPos;
+
+        instance.OnWindowSizeChange.Invoke(width, height);
         SetWindowPos(instance.windowHandler, 0, winPos.x, winPos.y, width, height, flags);
-        instance.UpdateCameraSize(winSize, new Vector2Int(width, height));
     }
 
     public static void CenterWindow() 
     {
-        Vector2Int windowSize = GetWindowSize();
+        Vector2Int centerPos = GetScreenCenterPos();
 
-        int screenWidth = Screen.currentResolution.width;
-        int screenHeight = Screen.currentResolution.height;
+        SetWindowCenterPos(centerPos.x, centerPos.y);
+    }
 
-        int centerX = (screenWidth - windowSize.x) / 2;
-        int centerY = (screenHeight - windowSize.y) / 2;
+    public static Vector2Int GetDefaultWindowSize() 
+    {
+        return instance.defaultWindowSize;
+    }
 
-        SetWindowPos(centerX, centerY);
+    private void SetDefaultWindowState() 
+    {
+        if (fullScreenWindow)
+        {
+            Vector2Int screenSize = GetScreenSize();
+            SetWindowSize(screenSize.x + 16, screenSize.y + 8);
+            //SetWindowSize(screenSize.x, screenSize.y - 2);
+        }
+        else
+        {
+            SetWindowSize(defaultWindowSize.x, defaultWindowSize.y);
+        }
+        CenterWindow();
     }
 
     private Rect GetWindowRect()
@@ -174,19 +269,18 @@ public class GameWindowManager : MonoBehaviour
         return windowRect;
     }
 
-    private void UpdateCameraSize(Vector2Int previousScreenSize, Vector2Int newScreenSize) 
-    {
-        float cameraSize = Camera.main.orthographicSize;
-
-        float newCameraSize = (newScreenSize.magnitude * cameraSize) / previousScreenSize.magnitude;
-
-        Camera.main.orthographicSize = newCameraSize;
-    }
-
     private IntPtr CustomWindowProcessor(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
     {
+        const int WM_CLOSE = 0x0010;
         const int WM_ENTERSIZEMOVE = 0x0231;
         const int WM_EXITSIZEMOVE = 0x0232;
+
+        if (msg == WM_CLOSE)
+        {
+            const int GWLP_WNDPROC = -4;
+
+            SetWindowLongPtr(windowHandler, GWLP_WNDPROC, originalWindowProcessor);
+        }
 
         if (msg == WM_ENTERSIZEMOVE)
         {
@@ -201,5 +295,25 @@ public class GameWindowManager : MonoBehaviour
         }
 
         return CallWindowProc(originalWindowProcessor, hWnd, msg, wParam, lParam);
+    }
+
+    private static Vector2Int ClampWindowPos(int x, int y) 
+    {
+        Vector2Int screenBounds = GetScreenSize() - GetWindowSize();
+
+        Vector2Int clampedPos = new Vector2Int(x, y);
+
+        clampedPos.x = Mathf.Max(0, clampedPos.x);
+        clampedPos.x = Mathf.Min(clampedPos.x, screenBounds.x);
+
+        clampedPos.y = Mathf.Max(0, clampedPos.y);
+        clampedPos.y = Mathf.Min(clampedPos.y, screenBounds.y);
+
+        return clampedPos;
+    }
+
+    private static Vector2Int ClampWindowPos(Vector2Int clampedPos)
+    {
+        return ClampWindowPos(clampedPos.x, clampedPos.y);
     }
 }
