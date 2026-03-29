@@ -6,34 +6,19 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
 
-    private SpriteRenderer sr;
-
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    private void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-
-        // INTERAÇÃO (tecla E)
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Interact();
-        }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         rb.velocity = movement.normalized * speed;
-    }
-
-    void Interact()
-    {
-        // muda pra uma cor aleatória
-        sr.color = new Color(Random.value, Random.value, Random.value);
     }
 }
