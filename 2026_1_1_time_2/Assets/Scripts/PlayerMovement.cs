@@ -21,4 +21,21 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = movement.normalized * speed;
     }
+
+
+    void Interact()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 1f);
+
+        foreach (Collider2D hit in hits)
+        {
+            Interactable interactable = hit.GetComponent<Interactable>();
+
+            if (interactable != null)
+            {
+                interactable.Interact();
+                return;
+            }
+        }
+    }
 }
