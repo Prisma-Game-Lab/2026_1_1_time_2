@@ -10,7 +10,6 @@ public class DropSlot : MonoBehaviour, IDropHandler
     {
         DraggableItem item = eventData.pointerDrag.GetComponent<DraggableItem>();
 
-        // 🚫 slot já ocupado → não deixa colocar outra
         if (currentItem != null)
         {
             Debug.Log("Slot já ocupado!");
@@ -23,7 +22,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
             item.transform.localPosition = Vector3.zero;
 
             currentItem = item;
-            item.currentSlot = this; // 👈 agora isso funciona corretamente
+            item.currentSlot = this; 
         }
     }
 

@@ -6,6 +6,7 @@ public class Interactable : MonoBehaviour
 
     public void Interact()
     {
+
         minigameUI.SetActive(true);
         Time.timeScale = 0f; // pausa o jogo
     }

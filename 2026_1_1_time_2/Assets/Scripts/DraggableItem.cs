@@ -12,7 +12,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [HideInInspector]
     public DropSlot currentSlot;
 
-    public Transform piecesContainer; // 👈 NOVO
+    public Transform piecesContainer; 
 
     void Awake()
     {
@@ -24,7 +24,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         startParent = transform.parent;
 
-        // limpa slot se estava em um
+   
         if (currentSlot != null)
         {
             currentSlot.ClearSlot();
@@ -44,7 +44,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         canvasGroup.blocksRaycasts = true;
 
-        // ❌ soltou fora de slot → volta pro container
+    
         if (transform.parent == canvas.transform)
         {
             transform.SetParent(piecesContainer);
