@@ -1029,6 +1029,7 @@ GameObject:
   - component: {fileID: 323253867}
   - component: {fileID: 323253866}
   - component: {fileID: 323253865}
+  - component: {fileID: 323253868}
   - component: {fileID: 323253864}
   - component: {fileID: 323253863}
   m_Layer: 0
@@ -1190,9 +1191,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-
+--- !u!114 &323253868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323253862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e068e2cc757b67f429bf30dd43a30ab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionCenter: {fileID: 323253867}
+  interactionRadius: 3
 --- !u!1 &497979130
-
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2698,7 +2711,6 @@ Transform:
   - {fileID: 1903896243}
   - {fileID: 1034870483}
   - {fileID: 628897240}
-  - {fileID: 520533003}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1571444630
@@ -3516,7 +3528,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: -0.46579474
+      value: -0.47363082
       objectReference: {fileID: 0}
     - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -3524,7 +3536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 1.9315895
+      value: 1.9472616
       objectReference: {fileID: 0}
     - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
       propertyPath: m_NormalizedViewPortRect.height

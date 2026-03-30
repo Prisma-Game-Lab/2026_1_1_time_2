@@ -6,7 +6,6 @@ public class PlayerInteract : MonoBehaviour
 {
     [SerializeField] private Transform interactionCenter;
     [SerializeField] private float interactionRadius;
-    [SerializeField] private LayerMask layerMask;
 
     void Update()
     {
@@ -18,46 +17,27 @@ public class PlayerInteract : MonoBehaviour
 
     private void Interact()
     {
-        RaycastHit2D[] hitInfo;
-        GameObject interactedObject;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(interactionCenter.position, interactionRadius);
 
-        hitInfo = Physics2D.CircleCastAll(interactionCenter.position, interactionRadius, Vector2.zero, 0, layerMask);
-
-        if (hitInfo.Length == 0)
+        if (hits.Length == 0)
         {
-            print("Hit nothing");
+            Debug.Log("Hit nothing");
             return;
         }
-        else 
-        {
-            RaycastHit2D closestHit = hitInfo[0];
-            float minDistance = Vector2.Distance(closestHit.point, interactionCenter.position);
 
-            foreach (RaycastHit2D hit in hitInfo)
+        foreach (Collider2D hit in hits)
+        {
+            IInteractable interactable = hit.GetComponent<IInteractable>();
+
+            if (interactable != null)
             {
-                float currentDistance = Vector2.Distance(hit.point, interactionCenter.position);
-
-                if (currentDistance < minDistance)
-                {
-                    closestHit = hit;
-                    minDistance = currentDistance;
-                }
+                Debug.Log("Interagiu com: " + hit.name);
+                interactable.Interact();
+                return;
             }
-
-            interactedObject = closestHit.transform.gameObject;
         }
 
-        print(interactedObject.name);
-
-        IInteractable interactableScript = interactedObject.GetComponent<IInteractable>();
-
-        if (interactableScript == null) 
-        {
-            print("No interactable script in object");
-            return;
-        }
-
-        interactableScript.Interact();
+        Debug.Log("Nenhum objeto interagível encontrado");
     }
 
     private void OnDrawGizmosSelected()
