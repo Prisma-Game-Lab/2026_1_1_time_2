@@ -241,8 +241,6 @@ public class GameWindowManager : MonoBehaviour
     {
         Vector2Int centerPos = GetScreenCenterPos();
 
-        print($"Center Pos: {centerPos}");
-
         SetWindowCenterPos(centerPos.x, centerPos.y);
     }
 
@@ -257,15 +255,12 @@ public class GameWindowManager : MonoBehaviour
         {
             Vector2Int screenSize = GetScreenSize();
             SetWindowSize(screenSize.x + 16, screenSize.y + 8);
-            print($"Default Window Pos: {GetWindowPos()}");
-            //SetWindowSize(screenSize.x, screenSize.y - 2);
         }
         else
         {
             SetWindowSize(defaultWindowSize.x, defaultWindowSize.y);
         }
         CenterWindow();
-        print($"After Center: {GetWindowPos()}");
     }
 
     private Rect GetWindowRect()
