@@ -6,6 +6,8 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField] private static CameraController instance;
+
     [SerializeField] private PixelPerfectCamera ppCamera;
     [SerializeField] private Transform targetTransform;
     //[SerializeField] private CinemachineConfiner2D confiner2D;
@@ -18,6 +20,16 @@ public class CameraController : MonoBehaviour
     float pixelPerUnit = 100;
 
     private Vector2 previousPos;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(instance);    
+        }
+
+        instance = this;
+    }
 
     private void Start()
     {
@@ -111,6 +123,11 @@ public class CameraController : MonoBehaviour
         ppCamera.refResolutionY = height;
 
         //confiner2D.InvalidateCache();
+    }
+
+    public static void SetFollowTarget(Transform target) 
+    {
+        instance.targetTransform = target;
     }
 
     private Vector2 GetCameraSize()

@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class PipePuzzle : MonoBehaviour
 {
+    [SerializeField] private GameObject canvas;
     [SerializeField] private ValveCategory[] categories;
+    [SerializeField] private Transform mouseObject;
 
     private void Start()
     {
@@ -13,6 +15,17 @@ public class PipePuzzle : MonoBehaviour
         {
             category.Initialize();
         }
+    }
+
+    public void ActivatePuzzle() 
+    {
+        canvas.SetActive(true);
+        CameraController.SetFollowTarget(mouseObject);
+    }
+
+    public void DeactivatePuzzle() 
+    {
+        canvas.SetActive(false);
     }
 
     public void ValidateAnswer() 
