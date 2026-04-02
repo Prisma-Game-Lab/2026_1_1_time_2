@@ -47,9 +47,8 @@ MonoBehaviour:
   startOnAwake: 1
   setSizeOnAwake: 0
   startWindowSize: {x: 0, y: 0}
-  minWindowSize: {x: 300, y: 150}
   shrinkingModifier: {x: 4, y: 2}
   shrinkUnitTime: 2
-  onMinSizeReached:
-    m_PersistentCalls:
-      m_Calls: []
+  deathMinWindowSize: {x: 100, y: 100}
+  deathShrinkingModifier: {x: 80, y: 40}
+  deathShrinkUnitTime: 0.5

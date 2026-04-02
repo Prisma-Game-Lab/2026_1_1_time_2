@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class MinigameManager : MonoBehaviour
+public class ChimeraPuzzle : BasePuzzle
 {
     public DropSlot headSlot;
     public DropSlot bodySlot;
@@ -37,19 +37,13 @@ public class MinigameManager : MonoBehaviour
             feetSlot.currentItem.itemID == correctFeet)
         {
             Debug.Log("Acertou!");
-            Win();
+            CorrectSolution();
         }
         else
         {
             Debug.Log("Errou!");
             StartCoroutine(FlashRed());
         }
-    }
-
-    void Win()
-    {
-        minigameUI.SetActive(false);
-        Time.timeScale = 1f;
     }
 
     IEnumerator FlashRed()

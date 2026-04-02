@@ -3,11 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PipePuzzle : MonoBehaviour
+public class PipePuzzle : BasePuzzle
 {
-    [SerializeField] private GameObject canvas;
     [SerializeField] private ValveCategory[] categories;
-    [SerializeField] private Transform mouseObject;
 
     private void Start()
     {
@@ -17,29 +15,18 @@ public class PipePuzzle : MonoBehaviour
         }
     }
 
-    public void ActivatePuzzle() 
-    {
-        canvas.SetActive(true);
-        CameraController.SetFollowTarget(mouseObject);
-    }
-
-    public void DeactivatePuzzle() 
-    {
-        canvas.SetActive(false);
-    }
-
     public void ValidateAnswer() 
     {
         foreach (var category in categories)
         {
             if (!category.Validate())
             {
-                print("Incorrect Solution");
+                IncorrectSolution();
                 return;
             }
         }
 
-        print("Right Solution");
+        CorrectSolution();
     }
 }
 

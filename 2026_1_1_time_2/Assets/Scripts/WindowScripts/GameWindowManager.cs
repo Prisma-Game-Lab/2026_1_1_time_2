@@ -35,12 +35,14 @@ public class GameWindowManager : MonoBehaviour
 
     [SerializeField] private bool fullScreenWindow;
     [SerializeField] private Vector2Int defaultWindowSize;
+    [SerializeField] private Vector2Int minWindowSize;
 
     //True means starting drag
     //False means ending drag
     [SerializeField] public UnityEvent<bool> OnWindowDragging;
     [SerializeField] public UnityEvent<int, int> OnWindowPosChange;
     [SerializeField] public UnityEvent<int, int> OnWindowSizeChange;
+    [SerializeField] public UnityEvent OnWindowMinSizeReached;
 
     private IntPtr windowHandler;
     private IntPtr originalWindowProcessor;
@@ -87,8 +89,8 @@ public class GameWindowManager : MonoBehaviour
                                                        Marshal.GetFunctionPointerForDelegate(newWindowProcessor));
         }
 
-        windowSize = GetWindowSize();
         windowPos = GetWindowPos();
+        windowSize = GetWindowSize();
         screenCenterPos = GetScreenCenterPos();
 
         SetDefaultWindowState();
@@ -96,8 +98,6 @@ public class GameWindowManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        //SetDefaultWindowState();
-
         if (!editorMode)
         {
             const int GWLP_WNDPROC = -4;
@@ -108,8 +108,8 @@ public class GameWindowManager : MonoBehaviour
 
     public static Vector2Int GetWindowPos()
     {
-        //if (instance.windowPos != -Vector2Int.one)
-        //    return instance.windowPos;
+        if (instance.windowPos != -Vector2Int.one)
+            return instance.windowPos;
 
         Rect windowRect = instance.GetWindowRect();
 
@@ -120,20 +120,15 @@ public class GameWindowManager : MonoBehaviour
 
     public static Vector2Int GetWindowCenterPos()
     {
-        Rect windowRect = instance.GetWindowRect();
-
-        Vector2Int pos = new Vector2Int(windowRect.Left, windowRect.Top);
-
-        pos.x += (windowRect.Right - windowRect.Left) / 2;
-        pos.y += (windowRect.Bottom - windowRect.Top) / 2;
+        Vector2Int pos = GetWindowPos() + GetWindowSize()/2;
 
         return pos;
     }
 
     public static Vector2Int GetScreenCenterPos() 
     {
-        //if (instance.screenCenterPos != -Vector2Int.one)
-        //    return instance.screenCenterPos;
+        if (instance.screenCenterPos != -Vector2Int.one)
+            return instance.screenCenterPos;
 
         Vector2Int pos = GetScreenSize();
         pos /= 2;
@@ -143,8 +138,8 @@ public class GameWindowManager : MonoBehaviour
 
     public static Vector2Int GetWindowSize()
     {
-        //if (instance.windowSize != -Vector2Int.one)
-        //    return instance.windowSize;
+        if (instance.windowSize != -Vector2Int.one)
+            return instance.windowSize;
 
         Rect windowRect = instance.GetWindowRect();
 
@@ -173,11 +168,7 @@ public class GameWindowManager : MonoBehaviour
 
         uint flags = SWP_NOSIZE | SWP_NOZORDER | SWP_SHOWWINDOW;
 
-        print($"Window Desired Pos: {x} {y}");
-
         Vector2Int winPos = ClampWindowPos(x, y);
-
-        print($"Window Clamped Pos: {winPos}");
 
         instance.windowPos = winPos;
 
@@ -213,17 +204,26 @@ public class GameWindowManager : MonoBehaviour
             flags = flags | SWP_NOMOVE;
         }
 
-        Vector2Int winPos = GetWindowPos();
         Vector2Int winSize = GetWindowSize();
+
+        width = Math.Max(instance.minWindowSize.x, width);
+        height = Math.Max(instance.minWindowSize.y, height);
+
+        instance.windowSize.x = width;
+        instance.windowSize.y = height;
+
+        if (winSize == new Vector2Int(width, height)) 
+        {
+            return;
+        }
+
+        Vector2Int winPos = GetWindowPos();
 
         int dx = (winSize.x - width) / 2;
         int dy = (winSize.y - height) / 2;
 
         winPos.x += dx;
         winPos.y += dy;
-
-        instance.windowSize.x = width;
-        instance.windowSize.y = height;
 
         Vector2Int clampedPos = ClampWindowPos(winPos);
         if (dx < 0)
@@ -235,6 +235,12 @@ public class GameWindowManager : MonoBehaviour
 
         instance.OnWindowSizeChange.Invoke(width, height);
         SetWindowPos(instance.windowHandler, 0, winPos.x, winPos.y, width, height, flags);
+
+        if (width <= instance.minWindowSize.x && height <= instance.minWindowSize.y)
+        {
+            print("Min size");
+            instance.OnWindowMinSizeReached.Invoke();
+        }
     }
 
     public static void CenterWindow() 
@@ -249,11 +255,18 @@ public class GameWindowManager : MonoBehaviour
         return instance.defaultWindowSize;
     }
 
+    public static void SetMinWindowSize(Vector2Int minWindowSize)
+    {
+        instance.minWindowSize = minWindowSize;
+        print(minWindowSize);
+    }
+
     private void SetDefaultWindowState() 
     {
         if (fullScreenWindow)
         {
             Vector2Int screenSize = GetScreenSize();
+            print(screenSize);
             SetWindowSize(screenSize.x + 16, screenSize.y + 8);
         }
         else

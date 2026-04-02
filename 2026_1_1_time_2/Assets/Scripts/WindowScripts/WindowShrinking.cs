@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 public class WindowShrinking : MonoBehaviour
 {
@@ -11,15 +12,11 @@ public class WindowShrinking : MonoBehaviour
 
     [Header("Variables")]
     [SerializeField] private Vector2Int startWindowSize;
-    [SerializeField] private Vector2Int minWindowSize;
     [SerializeField] private Vector2Int shrinkingModifier;
     [SerializeField] private float shrinkUnitTime;
     [SerializeField] private Vector2Int deathMinWindowSize;
     [SerializeField] private Vector2Int deathShrinkingModifier;
     [SerializeField] private float deathShrinkUnitTime;
-
-    [Header("Events")]
-    [SerializeField] private UnityEvent onMinSizeReached;
 
     private float currentShrinkTime;
 
@@ -70,15 +67,21 @@ public class WindowShrinking : MonoBehaviour
 
     public void StartShrinking() 
     {
+        if (deathSequence)
+            return;
 
         currentShrinkTime = 0;
-
         shrinking = true;
+        GameWindowManager.instance.OnWindowMinSizeReached.AddListener(ActivateDeathShrinking);
     }
 
     public void StopShrinking() 
     {
+        if (deathSequence)
+            return;
+
         shrinking = false;
+        GameWindowManager.instance.OnWindowMinSizeReached.RemoveListener(ActivateDeathShrinking);
     }
 
     public void SetPause(bool state) 
@@ -97,47 +100,41 @@ public class WindowShrinking : MonoBehaviour
         currentShrinkTime += Time.deltaTime;
         if (currentShrinkTime > shrinkUnitTime) 
         {
+            if (deathSequence)
+                print("a");
+
             currentShrinkTime -= shrinkUnitTime;
             
             Vector2Int currentSize = GameWindowManager.GetWindowSize();
             Vector2Int newSize = currentSize - shrinkingModifier;
-            newSize = new Vector2Int(Mathf.Max(minWindowSize.x, newSize.x), Mathf.Max(minWindowSize.y, newSize.y));
             GameWindowManager.SetWindowSize(newSize.x, newSize.y);
-
-            CheckForMinSize();
-        }
-    }
-
-    private void CheckForMinSize() 
-    {
-        Vector2Int currentSize = GameWindowManager.GetWindowSize();
-
-        if (currentSize.x <= minWindowSize.x || currentSize.y <= minWindowSize.y) 
-        {
-            if (!deathSequence)
-            {
-                deathSequence = true;
-                onMinSizeReached.Invoke();
-                ActivateDeathShrinking();
-            }
-            else
-            {
-                if (editorMode)
-                {
-                    print("Morreu");
-                }
-                else
-                {
-                    Application.Quit();
-                }
-            }
         }
     }
 
     private void ActivateDeathShrinking() 
     {
+        print("Death Sequence");
+        deathSequence = true;
         shrinkUnitTime = deathShrinkUnitTime;
         shrinkingModifier = deathShrinkingModifier;
-        minWindowSize = deathMinWindowSize;
+        print(deathMinWindowSize);
+        GameWindowManager.SetMinWindowSize(deathMinWindowSize);
+
+        GameWindowManager.instance.OnWindowMinSizeReached.RemoveListener(ActivateDeathShrinking);
+        GameWindowManager.instance.OnWindowMinSizeReached.AddListener(OnWindowDeath);
+    }
+
+    private void OnWindowDeath() 
+    {
+        GameWindowManager.instance.OnWindowMinSizeReached.RemoveListener(OnWindowDeath);
+
+        if (editorMode)
+        {
+            print("Morreu");
+        }
+        else
+        {
+            Application.Quit();
+        }
     }
 }

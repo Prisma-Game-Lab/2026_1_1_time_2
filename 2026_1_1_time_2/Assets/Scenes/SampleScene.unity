@@ -3091,7 +3091,7 @@ GameObject:
   - component: {fileID: 1914146420}
   - component: {fileID: 1914146419}
   m_Layer: 0
-  m_Name: MinigameManager
+  m_Name: Chimera Puzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3109,6 +3109,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff1a04dd6433714e869c00452e5cd09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shrinkValueOnError: {x: 0, y: 0}
+  OnEnable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1946416402}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1946416402}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   headSlot: {fileID: 75198970}
   bodySlot: {fileID: 760385724}
   feetSlot: {fileID: 201036915}
@@ -3129,7 +3160,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1946416406}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1918536370
@@ -3325,13 +3357,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1946416402}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1571444631}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1914146420}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3417,19 +3449,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: -0.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: -0.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3937061271283314606, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3499,6 +3531,5 @@ SceneRoots:
   - {fileID: 1047651368}
   - {fileID: 219604647}
   - {fileID: 178645156}
-  - {fileID: 1946416406}
   - {fileID: 1914146420}
   - {fileID: 837621071}
