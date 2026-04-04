@@ -15,18 +15,17 @@ public class PipePuzzle : BasePuzzle
         }
     }
 
-    public void ValidateAnswer() 
+    protected override bool CheckSolution()
     {
         foreach (var category in categories)
         {
             if (!category.Validate())
             {
-                IncorrectSolution();
-                return;
+                return false;
             }
         }
 
-        CorrectSolution();
+        return true;
     }
 }
 

@@ -12,6 +12,8 @@ public abstract class BasePuzzle : MonoBehaviour
     [SerializeField] private UnityEvent OnEnable;
     [SerializeField] private UnityEvent OnDisable;
 
+    protected bool completed;
+
     public virtual void EnablePuzzle() 
     {
         OnEnable.Invoke();
@@ -26,9 +28,30 @@ public abstract class BasePuzzle : MonoBehaviour
         //CameraController.SetFollowTarget(playerObject);
     }
 
+    public virtual void ValidateSolution() 
+    {
+        if (completed) return;
+
+        if (CheckSolution()) 
+        {
+            CorrectSolution();
+        }
+        else 
+        {
+            IncorrectSolution();
+        }
+    }
+
+    protected virtual bool CheckSolution() 
+    {
+        return false;
+    }
+
     protected virtual void CorrectSolution() 
     {
         print("Correct Solution");
+        completed = true;
+        PuzzleManager.OnPuzzleCompleted();
         DisablePuzzle();
     }
 

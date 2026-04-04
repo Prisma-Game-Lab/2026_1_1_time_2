@@ -47,8 +47,8 @@ MonoBehaviour:
   sounds:
   - name: Main Loop
     clip: {fileID: 8300000, guid: 2ed93bdfe0c89b44abb74135efa1c418, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 1
+    pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Intro
@@ -57,4 +57,4 @@ MonoBehaviour:
     pitch: 0
     loop: 1
     source: {fileID: 0}
-  combat: 0
+  skip_intro: 1

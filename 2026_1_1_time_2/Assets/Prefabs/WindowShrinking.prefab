@@ -47,7 +47,7 @@ MonoBehaviour:
   startOnAwake: 1
   setSizeOnAwake: 0
   startWindowSize: {x: 0, y: 0}
-  shrinkingModifier: {x: 4, y: 2}
+  shrinkingModifier: {x: 60, y: 30}
   shrinkUnitTime: 2
   deathMinWindowSize: {x: 100, y: 100}
   deathShrinkingModifier: {x: 80, y: 40}
