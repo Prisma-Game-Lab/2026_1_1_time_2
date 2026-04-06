@@ -17,14 +17,14 @@ public abstract class BasePuzzle : MonoBehaviour
     public virtual void EnablePuzzle() 
     {
         OnEnable.Invoke();
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         //CameraController.SetFollowTarget(mouseObject);
     }
 
     public virtual void DisablePuzzle()
     {
         OnDisable.Invoke();
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
         //CameraController.SetFollowTarget(playerObject);
     }
 
