@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -12,7 +13,9 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [HideInInspector]
     public DropSlot currentSlot;
 
-    public Transform piecesContainer; 
+    // 🔹 posição original
+    private Vector3 originalPosition;
+    private Transform originalParent;
 
     void Awake()
     {
@@ -20,11 +23,17 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
+    void Start()
+    {
+        originalPosition = transform.position;
+        originalParent = transform.parent;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         startParent = transform.parent;
 
-   
+        // Se estava em um slot, limpa ele
         if (currentSlot != null)
         {
             currentSlot.ClearSlot();
@@ -44,11 +53,28 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         canvasGroup.blocksRaycasts = true;
 
-    
+        // Se não foi dropado em nenhum slot válido
         if (transform.parent == canvas.transform)
         {
-            transform.SetParent(piecesContainer);
-            transform.localPosition = Vector3.zero;
+            StartCoroutine(VoltarSuave());
         }
+    }
+
+    IEnumerator VoltarSuave()
+    {
+        float tempo = 0f;
+        float duracao = 0.2f;
+
+        Vector3 inicio = transform.position;
+
+        while (tempo < duracao)
+        {
+            transform.position = Vector3.Lerp(inicio, originalPosition, tempo / duracao);
+            tempo += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = originalPosition;
+        transform.SetParent(originalParent);
     }
 }
