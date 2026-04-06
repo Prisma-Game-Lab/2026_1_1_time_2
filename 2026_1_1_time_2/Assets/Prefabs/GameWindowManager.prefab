@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fullScreenWindow: 1
   defaultWindowSize: {x: 1000, y: 800}
-  minWindowSize: {x: 240, y: 180}
+  minWindowSize: {x: 360, y: 270}
   OnWindowDragging:
     m_PersistentCalls:
       m_Calls: []

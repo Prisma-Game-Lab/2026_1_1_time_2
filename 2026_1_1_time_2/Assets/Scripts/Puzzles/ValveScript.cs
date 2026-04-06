@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ValveScript : MonoBehaviour
 {
     [Header("Variables")]
-    [SerializeField] private Color activeColor;
+    [SerializeField] private Sprite closedSprite;
 
     [Header("Events")]
     [SerializeField] private UnityEvent OnActivate;
@@ -17,13 +17,13 @@ public class ValveScript : MonoBehaviour
     private Image image;
 
     private bool state;
-    private Color originalColor;
+    private Sprite originalSprite;
 
     private void Start()
     {
         image = GetComponent<Image>();
 
-        originalColor = image.color;
+        originalSprite = image.sprite;
     }
 
     public void Initialize(ValveCategory category) 
@@ -37,16 +37,26 @@ public class ValveScript : MonoBehaviour
 
         if (state) 
         {
-            image.color = activeColor;
-            category.OnValveActivated();
-            OnActivate.Invoke();
+            ActivateValve();
         }
         else 
         {
-            image.color = originalColor;
-            category.OnValveDeactivated();
-            OnDeactivate.Invoke();
+            DeactivateValve();
         }
+    }
+
+    public void ActivateValve() 
+    {
+        image.sprite = closedSprite;
+        category.OnValveActivated();
+        OnActivate.Invoke();
+    }
+
+    public void DeactivateValve()
+    {
+        image.sprite = originalSprite;
+        category.OnValveDeactivated();
+        OnDeactivate.Invoke();
     }
 
     public bool IsActive() 
