@@ -13,7 +13,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [HideInInspector]
     public DropSlot currentSlot;
 
-    // 🔹 posição original
+    
     private Vector3 originalPosition;
     private Transform originalParent;
 
@@ -33,7 +33,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         startParent = transform.parent;
 
-        // Se estava em um slot, limpa ele
+       
         if (currentSlot != null)
         {
             currentSlot.ClearSlot();
@@ -53,7 +53,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         canvasGroup.blocksRaycasts = true;
 
-        // Se não foi dropado em nenhum slot válido
+        
         if (transform.parent == canvas.transform)
         {
             StartCoroutine(VoltarSuave());
