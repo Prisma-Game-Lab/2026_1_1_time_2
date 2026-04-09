@@ -9,7 +9,9 @@ public class CameraController : MonoBehaviour
     [SerializeField] private static CameraController instance;
 
     [SerializeField] private PixelPerfectCamera ppCamera;
-    [SerializeField] private Transform targetTransform;
+    [SerializeField] private CameraFollowStrategy currentFollowStrategy;
+    [SerializeField] private CameraFollowStrategy playerFollowStrategy;
+    [SerializeField] private CameraFollowStrategy mouseFollowStrategy;
     //[SerializeField] private CinemachineConfiner2D confiner2D;
 
     [SerializeField] private float minWindowUpdateDistance;
@@ -17,7 +19,7 @@ public class CameraController : MonoBehaviour
 
     private Vector2 confinerXBounds;
     private Vector2 confinerYBounds;
-    float pixelPerUnit = 100;
+    private float pixelPerUnit = 100;
 
     private Vector2 previousPos;
 
@@ -55,7 +57,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        FollowTarget();
+        currentFollowStrategy.FollowTarget();
 
         if (Vector2.Distance(transform.position, previousPos) > minWindowUpdateDistance) 
         {
@@ -73,7 +75,7 @@ public class CameraController : MonoBehaviour
 
         pixelPerUnit = diff.x;
     }
-
+     
     private void CalculateConfiner() 
     {
         Vector3 confinerScale = (Vector2)GameWindowManager.GetScreenCenterPos() / pixelPerUnit;
@@ -82,39 +84,24 @@ public class CameraController : MonoBehaviour
         confinerScale.z = 1;
     }
 
-    private void FollowTarget() 
+    public void FollowPlayer() 
     {
-        if (targetTransform == null)
-            return;
+        currentFollowStrategy = playerFollowStrategy;
+    }
 
-        Vector3 followPos = targetTransform.position;
-        followPos.z = -10;
+    public void FollowMouse() 
+    {
+        currentFollowStrategy = mouseFollowStrategy;
+    }
 
-        Vector2 cameraSize = GetCameraSize();
-        float confinerXSize = MathF.Abs(confinerXBounds.x) + MathF.Abs(confinerXBounds.y);
-        float confinerYSize = MathF.Abs(confinerYBounds.x) + MathF.Abs(confinerYBounds.y);
+    public Vector2 GetConfinerXBound() 
+    {
+        return confinerXBounds;
+    }
 
-        if (cameraSize.x > confinerXSize) 
-        {
-            followPos.x = confinerXBounds.y + confinerXBounds.x;
-        }
-        else 
-        {
-            followPos.x = MathF.Max(followPos.x, confinerXBounds.x + cameraSize.x / 2);
-            followPos.x = MathF.Min(followPos.x, confinerXBounds.y - cameraSize.x / 2);
-        }
-
-        if (cameraSize.y > confinerYSize)
-        {
-            followPos.y = confinerYBounds.y + confinerYBounds.x;
-        }
-        else 
-        {
-            followPos.y = MathF.Max(followPos.y, confinerYBounds.x + cameraSize.y / 2);
-            followPos.y = MathF.Min(followPos.y, confinerYBounds.y - cameraSize.y / 2);
-        }
-
-        transform.position = followPos;
+    public Vector2 GetConfinerYBound() 
+    {
+        return confinerYBounds;
     }
 
     private void SetCameraSize(int width, int height) 
@@ -125,12 +112,7 @@ public class CameraController : MonoBehaviour
         //confiner2D.InvalidateCache();
     }
 
-    public static void SetFollowTarget(Transform target) 
-    {
-        instance.targetTransform = target;
-    }
-
-    private Vector2 GetCameraSize()
+    public Vector2 GetCameraSize()
     {
         Vector2 cameraSize = Vector2.zero;
 

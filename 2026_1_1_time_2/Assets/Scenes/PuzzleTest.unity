@@ -2528,22 +2528,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
-      propertyPath: m_NormalizedViewPortRect.x
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
-      propertyPath: m_NormalizedViewPortRect.y
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
-      propertyPath: m_NormalizedViewPortRect.width
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
-      propertyPath: m_NormalizedViewPortRect.height
-      value: 1.5
-      objectReference: {fileID: 0}
+    - target: {fileID: 1616964150302392934, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
+      propertyPath: targetTransform
+      value: 
+      objectReference: {fileID: 323253867}
     - target: {fileID: 3937061271283314606, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2588,10 +2576,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 6762540454708224476, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
-      propertyPath: targetTransform
-      value: 
-      objectReference: {fileID: 323253867}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
