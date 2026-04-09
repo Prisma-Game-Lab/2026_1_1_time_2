@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class CameraFollowStrategy : MonoBehaviour
 {
-    [SerializeField] private CameraController cc;
+    [SerializeField] protected CameraController cc;
 
     [SerializeField] protected Transform targetTransform;
 
