@@ -394,6 +394,69 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotType: Head
   currentItem: {fileID: 0}
+--- !u!1 &132900017
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 132900019}
+  - component: {fileID: 132900018}
+  m_Layer: 0
+  m_Name: PuzzleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &132900018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132900017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfa7e09d6fc6bb46ab448729e2c8374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nPuzzles: 1
+  puzzleCompletedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  allPuzzleCompletedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 178645152}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!4 &132900019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132900017}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 432.7618, y: 277.72183, z: 2.9840653}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &167139755
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,8 +987,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -250.1882, y: 211.50215}
-  m_SizeDelta: {x: 241.3294, y: 334.8357}
+  m_AnchoredPosition: {x: -136.72615, y: 201.49075}
+  m_SizeDelta: {x: 468.2535, y: 354.8585}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &219604644
 GameObject:
@@ -2585,7 +2648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 403.6, y: -193.3}
+  m_AnchoredPosition: {x: 378.1, y: -193.3}
   m_SizeDelta: {x: 87.7783, y: 81.3088}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1130923486
@@ -3984,9 +4047,9 @@ MonoBehaviour:
   headSlot: {fileID: 75198970}
   bodySlot: {fileID: 760385724}
   feetSlot: {fileID: 201036915}
-  correctHead: Head2
-  correctBody: Body1
-  correctFeet: Feet3
+  correctHead: Head1
+  correctBody: Body2
+  correctFeet: Feet2
   minigameUI: {fileID: 1946416402}
   confirmButton: {fileID: 1909403022}
 --- !u!4 &1914146420
@@ -4447,6 +4510,7 @@ SceneRoots:
   - {fileID: 260552592}
   - {fileID: 1439099955}
   - {fileID: 6313418599479270657}
+  - {fileID: 132900019}
   - {fileID: 1898616986}
   - {fileID: 1047651368}
   - {fileID: 219604647}
