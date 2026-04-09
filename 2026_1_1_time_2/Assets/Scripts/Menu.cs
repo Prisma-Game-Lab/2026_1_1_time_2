@@ -7,10 +7,12 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] Animator animator;
     [SerializeField] WindowShrinking win;
+    [SerializeField] GameObject player;
     public void OnStartPress()
     {
         animator.SetTrigger("Start");
         win.StartShrinking();
+        player.GetComponent<PlayerMovement>().enabled = true;
     }
     public void OnVolumeSliderChanged(float newValue) // valor 0.0 a 1.0
     {

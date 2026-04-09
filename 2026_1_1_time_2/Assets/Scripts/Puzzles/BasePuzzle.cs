@@ -12,12 +12,15 @@ public abstract class BasePuzzle : MonoBehaviour
     [SerializeField] private UnityEvent OnEnable;
     [SerializeField] private UnityEvent OnDisable;
 
+    [SerializeField] private PlayerMovement player;
+
     protected bool completed;
 
     public virtual void EnablePuzzle() 
     {
         OnEnable.Invoke();
         Time.timeScale = 0f;
+        player.enabled = false;
         //CameraController.SetFollowTarget(mouseObject);
     }
 
@@ -25,6 +28,7 @@ public abstract class BasePuzzle : MonoBehaviour
     {
         OnDisable.Invoke();
         Time.timeScale = 1f;
+        player.enabled = true;
         //CameraController.SetFollowTarget(playerObject);
     }
 
