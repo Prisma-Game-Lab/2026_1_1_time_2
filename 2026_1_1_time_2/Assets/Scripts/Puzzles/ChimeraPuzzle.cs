@@ -12,46 +12,24 @@ public class ChimeraPuzzle : BasePuzzle
     public string correctBody = "Body1";
     public string correctFeet = "Feet3";
 
-    public GameObject minigameUI;
-
-    public Button confirmButton;
-    private Color originalColor;
-
-    void Start()
-    {
-        originalColor = confirmButton.image.color;
-    }
-
-    public void Confirm()
+    protected override bool CheckSolution()
     {
         if (headSlot.currentItem == null ||
             bodySlot.currentItem == null ||
             feetSlot.currentItem == null)
         {
-            Debug.Log("Faltam peças!");
-            return;
+            return false;
         }
 
         if (headSlot.currentItem.itemID == correctHead &&
             bodySlot.currentItem.itemID == correctBody &&
             feetSlot.currentItem.itemID == correctFeet)
         {
-            Debug.Log("Acertou!");
-            CorrectSolution();
+            return true;
         }
         else
         {
-            Debug.Log("Errou!");
-            StartCoroutine(FlashRed());
+            return false;
         }
-    }
-
-    IEnumerator FlashRed()
-    {
-        confirmButton.image.color = Color.red;
-
-        yield return new WaitForSecondsRealtime(0.5f);
-
-        confirmButton.image.color = originalColor;
     }
 }

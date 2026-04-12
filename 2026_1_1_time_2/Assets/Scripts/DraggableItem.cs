@@ -4,7 +4,6 @@ using System.Collections;
 
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    private Transform startParent;
     private Canvas canvas;
     private CanvasGroup canvasGroup;
 
@@ -13,17 +12,18 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [HideInInspector]
     public DropSlot currentSlot;
 
-    
     private Vector3 originalPosition;
     private Transform originalParent;
 
-    void Awake()
+    private Vector3 dragOffset;
+
+    private void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    void Start()
+    private void Start()
     {
         originalPosition = transform.position;
         originalParent = transform.parent;
@@ -31,9 +31,6 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        startParent = transform.parent;
-
-       
         if (currentSlot != null)
         {
             currentSlot.ClearSlot();
@@ -42,17 +39,18 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         transform.SetParent(canvas.transform);
         canvasGroup.blocksRaycasts = false;
+
+        dragOffset = transform.position - GetMouseWorldPos();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = Input.mousePosition;
+        transform.position = GetMouseWorldPos() + dragOffset;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = true;
-
         
         if (transform.parent == canvas.transform)
         {
@@ -60,7 +58,16 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
     }
 
-    IEnumerator VoltarSuave()
+    private Vector3 GetMouseWorldPos() 
+    {
+        Vector2 mousePos = Input.mousePosition;
+        Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        worldMousePos.z = 0;
+
+        return worldMousePos;
+    }
+
+    private IEnumerator VoltarSuave()
     {
         float tempo = 0f;
         float duracao = 0.2f;

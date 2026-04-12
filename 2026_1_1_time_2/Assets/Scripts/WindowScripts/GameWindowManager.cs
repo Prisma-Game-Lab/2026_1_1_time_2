@@ -258,7 +258,6 @@ public class GameWindowManager : MonoBehaviour
     public static void SetMinWindowSize(Vector2Int minWindowSize)
     {
         instance.minWindowSize = minWindowSize;
-        print(minWindowSize);
     }
 
     private void SetDefaultWindowState() 
@@ -266,7 +265,6 @@ public class GameWindowManager : MonoBehaviour
         if (fullScreenWindow)
         {
             Vector2Int screenSize = GetScreenSize();
-            print(screenSize);
             SetWindowSize(screenSize.x + 16, screenSize.y + 8);
         }
         else
