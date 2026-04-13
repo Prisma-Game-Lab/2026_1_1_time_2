@@ -19,17 +19,19 @@ public abstract class BasePuzzle : MonoBehaviour
     public virtual void EnablePuzzle() 
     {
         OnEnable.Invoke();
-        player.enabled = false;
+        if (player != null)
+            player.enabled = false;
         //Time.timeScale = 0f;
-        //CameraController.SetFollowTarget(mouseObject);
+        CameraController.FollowMouse();
     }
 
     public virtual void DisablePuzzle()
     {
         OnDisable.Invoke();
-        player.enabled = true;
+        if (player != null)
+            player.enabled = true;
         //Time.timeScale = 1f;
-        //CameraController.SetFollowTarget(playerObject);
+        CameraController.FollowPlayer();
     }
 
     public virtual void ValidateSolution() 

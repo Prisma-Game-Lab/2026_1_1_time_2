@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraFollowTransform : CameraFollowStrategy
 {
+    [SerializeField] private Transform targetTransform;
+
     public override void FollowTarget()
     {
         if (targetTransform == null)

@@ -7,8 +7,6 @@ public abstract class CameraFollowStrategy : MonoBehaviour
 {
     [SerializeField] protected CameraController cc;
 
-    [SerializeField] protected Transform targetTransform;
-
     public virtual void FollowTarget() 
     {
         return;

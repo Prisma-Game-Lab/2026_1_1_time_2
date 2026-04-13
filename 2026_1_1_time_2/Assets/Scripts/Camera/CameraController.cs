@@ -6,14 +6,15 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private static CameraController instance;
+    public static CameraController instance;
 
+    [Header("References")]
     [SerializeField] private PixelPerfectCamera ppCamera;
-    [SerializeField] private CameraFollowStrategy currentFollowStrategy;
     [SerializeField] private CameraFollowStrategy playerFollowStrategy;
     [SerializeField] private CameraFollowStrategy mouseFollowStrategy;
-    //[SerializeField] private CinemachineConfiner2D confiner2D;
 
+    [Header("Variables")]
+    [SerializeField] private FollowStrategy defaultFollowStrategy;
     [SerializeField] private float minWindowUpdateDistance;
     [SerializeField] private float minWindowUpdateDifference;
 
@@ -23,18 +24,34 @@ public class CameraController : MonoBehaviour
 
     private Vector2 previousPos;
 
+    private CameraFollowStrategy currentFollowStrategy;
+
+    enum FollowStrategy 
+    {
+        Player, Mouse
+    }
+
     private void Awake()
     {
-        if (instance != null && instance != this)
+        if (instance != null && instance != this) 
         {
-            Destroy(instance);    
+            Destroy(instance);
         }
-
         instance = this;
     }
 
     private void Start()
     {
+        switch (defaultFollowStrategy) 
+        {
+            case FollowStrategy.Player:
+                currentFollowStrategy = playerFollowStrategy;
+                break;
+            case FollowStrategy.Mouse:
+                currentFollowStrategy = mouseFollowStrategy;
+                break;
+        }
+
         CalculatePixelPerUnit();
 
         previousPos = transform.position;
@@ -84,14 +101,14 @@ public class CameraController : MonoBehaviour
         confinerScale.z = 1;
     }
 
-    public void FollowPlayer() 
+    public static void FollowPlayer() 
     {
-        currentFollowStrategy = playerFollowStrategy;
+        instance.currentFollowStrategy = instance.playerFollowStrategy;
     }
 
-    public void FollowMouse() 
+    public static void FollowMouse() 
     {
-        currentFollowStrategy = mouseFollowStrategy;
+        instance.currentFollowStrategy = instance.mouseFollowStrategy;
     }
 
     public Vector2 GetConfinerXBound() 
