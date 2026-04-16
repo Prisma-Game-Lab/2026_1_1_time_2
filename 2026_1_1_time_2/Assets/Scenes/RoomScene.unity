@@ -879,7 +879,7 @@ GameObject:
   - component: {fileID: 899582458}
   - component: {fileID: 899582459}
   m_Layer: 0
-  m_Name: CloseUps
+  m_Name: CloseUpsManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1062,7 +1062,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1175595794}
   m_Layer: 0
-  m_Name: CloseUp
+  m_Name: CloseUpSpots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
