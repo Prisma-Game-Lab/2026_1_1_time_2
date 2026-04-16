@@ -5,11 +5,24 @@ using UnityEngine;
 
 public class CloseUpManager : MonoBehaviour
 {
+    public static CloseUpManager instance;
+
     [SerializeField] private CloseUp[] closeUps;
 
     private Dictionary<string, CloseUp> closeUpDict;
     private Stack<CloseUp> closeUpStack = new Stack<CloseUp>();
     private CloseUp currentCloseUp;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this) 
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+    }
 
     private void Start()
     {
