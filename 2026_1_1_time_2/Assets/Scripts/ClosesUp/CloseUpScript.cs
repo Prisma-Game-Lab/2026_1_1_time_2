@@ -1,28 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CloseUpScript : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private GameObject closeUpButton;
-
-    [Header("Config")]
-    [SerializeField] private string subCloseUp;
-
-    private void Start()
-    {
-        if (subCloseUp != "")
-            closeUpButton.SetActive(true);
-    }
-
     public void Close() 
     {
         CloseUpManager.instance.Close();
     }
 
-    public void OpenSubcloseUp() 
+    public void OpenSubcloseUp(GameObject subCloseUp) 
     {
-        CloseUpManager.instance.Open(subCloseUp);
+        CloseUpManager.instance.Open(subCloseUp.name);
     }
 }

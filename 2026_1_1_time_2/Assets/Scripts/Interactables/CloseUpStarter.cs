@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class CloseUpStarter : MonoBehaviour, IInteractable
 {
-    [SerializeField] private string closeUpName;
+    [SerializeField] private GameObject closeUp;
 
     public void Interact()
     {
         print("Open closeUp");
-        CloseUpManager.instance.Open(closeUpName);
+        CloseUpManager.instance.Open(closeUp.name);
     }
 }

@@ -175,6 +175,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7492049662303882025, guid: 534fe2744c26fde489686671ecbaa18d, type: 3}
+      propertyPath: closeUp
+      value: 
+      objectReference: {fileID: 8878561366698706004}
+    - target: {fileID: 7492049662303882025, guid: 534fe2744c26fde489686671ecbaa18d, type: 3}
       propertyPath: closeUpName
       value: AlgumaCoisa
       objectReference: {fileID: 0}
@@ -567,10 +571,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7080265164004739663, guid: 25172b92819b9a34da4fc1a61875633a, type: 3}
-      propertyPath: subCloseUp
-      value: AlgumaCoisa3
+    - target: {fileID: 3118297577709953223, guid: 25172b92819b9a34da4fc1a61875633a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8017927377074351028, guid: 25172b92819b9a34da4fc1a61875633a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 816860948}
     - target: {fileID: 8112660018451307872, guid: 25172b92819b9a34da4fc1a61875633a, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -727,6 +735,10 @@ PrefabInstance:
       value: CloseUp (2)
       objectReference: {fileID: 0}
     - target: {fileID: 2931205843567432003, guid: 25172b92819b9a34da4fc1a61875633a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118297577709953223, guid: 25172b92819b9a34da4fc1a61875633a, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -913,15 +925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcd8e4b008df5049859ebaee552b726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closeUps:
-  - name: AlgumaCoisa
-    closeUpObject: {fileID: 8878561366698706004}
-  - name: AlgumaCoisa2
-    closeUpObject: {fileID: 655377576}
-  - name: AlgumaCoisa3
-    closeUpObject: {fileID: 816860948}
-  - name: AlgumaCoisa4
-    closeUpObject: {fileID: 1589027981}
+  closeUpHolder: {fileID: 1857867824}
 --- !u!1 &1171936764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1411,6 +1415,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7492049662303882025, guid: 534fe2744c26fde489686671ecbaa18d, type: 3}
+      propertyPath: closeUp
+      value: 
+      objectReference: {fileID: 816860948}
+    - target: {fileID: 7492049662303882025, guid: 534fe2744c26fde489686671ecbaa18d, type: 3}
       propertyPath: closeUpName
       value: AlgumaCoisa3
       objectReference: {fileID: 0}
@@ -1438,11 +1446,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6044493328962508094, guid: 534fe2744c26fde489686671ecbaa18d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.74
+      value: 2.84
       objectReference: {fileID: 0}
     - target: {fileID: 6044493328962508094, guid: 534fe2744c26fde489686671ecbaa18d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.24
+      value: 1.29
       objectReference: {fileID: 0}
     - target: {fileID: 6044493328962508094, guid: 534fe2744c26fde489686671ecbaa18d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1476,6 +1484,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7492049662303882025, guid: 534fe2744c26fde489686671ecbaa18d, type: 3}
+      propertyPath: closeUp
+      value: 
+      objectReference: {fileID: 1589027981}
     - target: {fileID: 7492049662303882025, guid: 534fe2744c26fde489686671ecbaa18d, type: 3}
       propertyPath: closeUpName
       value: AlgumaCoisa4
@@ -1994,6 +2006,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7492049662303882025, guid: 534fe2744c26fde489686671ecbaa18d, type: 3}
+      propertyPath: closeUp
+      value: 
+      objectReference: {fileID: 655377576}
+    - target: {fileID: 7492049662303882025, guid: 534fe2744c26fde489686671ecbaa18d, type: 3}
       propertyPath: closeUpName
       value: AlgumaCoisa2
       objectReference: {fileID: 0}
@@ -2353,10 +2369,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CloseUp
       objectReference: {fileID: 0}
-    - target: {fileID: 7080265164004739663, guid: 25172b92819b9a34da4fc1a61875633a, type: 3}
-      propertyPath: subCloseUp
-      value: AlgumaCoisa2
+    - target: {fileID: 3118297577709953223, guid: 25172b92819b9a34da4fc1a61875633a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8017927377074351028, guid: 25172b92819b9a34da4fc1a61875633a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 655377576}
     - target: {fileID: 8177640541649610014, guid: 25172b92819b9a34da4fc1a61875633a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

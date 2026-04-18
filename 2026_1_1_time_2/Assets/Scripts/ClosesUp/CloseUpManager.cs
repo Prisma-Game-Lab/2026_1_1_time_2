@@ -7,11 +7,11 @@ public class CloseUpManager : MonoBehaviour
 {
     public static CloseUpManager instance;
 
-    [SerializeField] private CloseUp[] closeUps;
+    [SerializeField] private GameObject closeUpHolder;
 
-    private Dictionary<string, CloseUp> closeUpDict;
-    private Stack<CloseUp> closeUpStack = new Stack<CloseUp>();
-    private CloseUp currentCloseUp;
+    private Dictionary<string, GameObject> closeUpDict;
+    private Stack<GameObject> closeUpStack = new Stack<GameObject>();
+    private GameObject currentCloseUp;
 
     private void Awake()
     {
@@ -26,16 +26,20 @@ public class CloseUpManager : MonoBehaviour
 
     private void Start()
     {
-        closeUpDict = new Dictionary<string, CloseUp>();
-        foreach (CloseUp closeUp in closeUps) 
+        closeUpDict = new Dictionary<string, GameObject>();
+
+        for (int i = 0; i < closeUpHolder.transform.childCount; i++)
         {
-            closeUpDict.Add(closeUp.name, closeUp);
+            Transform closeUpTransform = closeUpHolder.transform.GetChild(i);
+            GameObject closeUpObj = closeUpTransform.gameObject;
+
+            closeUpDict.Add(closeUpObj.name, closeUpObj);
         }
     }
 
     public void Open(string name) 
     {
-        if (closeUpDict.TryGetValue(name, out CloseUp value))
+        if (closeUpDict.TryGetValue(name, out GameObject value))
         {
             OpenSimple(value);
         }
@@ -50,12 +54,12 @@ public class CloseUpManager : MonoBehaviour
         CloseSimple();
         if (closeUpStack.Count > 0)
         {
-            CloseUp nextCloseUp = closeUpStack.Pop();
+            GameObject nextCloseUp = closeUpStack.Pop();
             OpenSimple(nextCloseUp);
         }
     }
 
-    private void OpenSimple(CloseUp closeUp) 
+    private void OpenSimple(GameObject closeUp) 
     {
         if (currentCloseUp != null) 
         {
@@ -64,7 +68,7 @@ public class CloseUpManager : MonoBehaviour
         }
 
         currentCloseUp = closeUp;
-        currentCloseUp.closeUpObject.SetActive(true);
+        currentCloseUp.SetActive(true);
     }
 
     private void CloseSimple() 
@@ -74,16 +78,9 @@ public class CloseUpManager : MonoBehaviour
             return;
         }
 
-        currentCloseUp.closeUpObject.SetActive(false);
+        currentCloseUp.SetActive(false);
         currentCloseUp = null;
 
         return;
     }
-}
-
-[Serializable]
-public class CloseUp 
-{
-    public string name;
-    public GameObject closeUpObject;
 }
