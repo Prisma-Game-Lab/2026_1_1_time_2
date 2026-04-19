@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class CameraFollowTransform : CameraFollowStrategy
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Transform targetTransform;
 
-    // Update is called once per frame
-    void Update()
+    public override void FollowTarget()
     {
-        
+        if (targetTransform == null)
+            return;
+
+        Vector3 followPos = targetTransform.position;
+        followPos.z = -10;
+
+        followPos = ConfineCoords(followPos);
+
+        transform.position = followPos;
     }
 }
