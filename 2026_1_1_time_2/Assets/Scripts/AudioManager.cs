@@ -48,7 +48,7 @@ public class AudioManager : MonoBehaviour
         if (skip_intro) Play("Main Loop");
     }
 
-    public void Play(string name)
+    public void Play(string name, bool randpitch = true)
     {
         Sound s = sounds.Find(x => x.name == name);
         if (s == null)
@@ -56,6 +56,8 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning($"Som '{name}' n�o encontrado!");
             return;
         }
+        if (randpitch) s.source.pitch = Random.Range(0.75f, 1.25f);
+        else s.source.pitch = 1;
         s.source.Play();
         Debug.Log($"Tocando som: {name}");
     }

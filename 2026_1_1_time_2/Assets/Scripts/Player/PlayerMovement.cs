@@ -32,15 +32,24 @@ public class PlayerMovement : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        if (movement.magnitude > minTurnMagnitude) 
+        if (movement.x != 0 || movement.y != 0)
         {
-            if (Mathf.Abs(movement.x) > Mathf.Abs(movement.y)) 
+            AudioManager.Instance.Play("Passos");
+        }
+        else
+        {
+            AudioManager.Instance.Stop("Passos");
+        }
+        if (movement.magnitude > minTurnMagnitude)
+        {
+            
+            if (Mathf.Abs(movement.x) > Mathf.Abs(movement.y))
             {
-                if (movement.x > 0) 
+                if (movement.x > 0)
                 {
                     pc.SetFacingDir(Vector2.right);
                 }
-                else 
+                else
                 {
                     pc.SetFacingDir(Vector2.left);
                 }

@@ -4692,11 +4692,71 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
+      propertyPath: sounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
+      propertyPath: sounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4698c8b829682b441b7a19b73a58fede, type: 3}
+    - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
+      propertyPath: sounds.Array.data[1].name
+      value: Passos
+      objectReference: {fileID: 0}
+    - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
+      propertyPath: sounds.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1e265811ac343e94b917ff6f935dab55, type: 3}
+    - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
+      propertyPath: sounds.Array.data[2].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
+      propertyPath: sounds.Array.data[2].name
+      value: Balanca1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
+      propertyPath: sounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5e0308311dbdda94eb5bd5c441b88caa, type: 3}
+    - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
+      propertyPath: sounds.Array.data[3].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
+      propertyPath: sounds.Array.data[3].name
+      value: Balanca2
+      objectReference: {fileID: 0}
+    - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
       propertyPath: sounds.Array.data[0].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
+      propertyPath: sounds.Array.data[1].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
+      propertyPath: sounds.Array.data[2].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
+      propertyPath: sounds.Array.data[3].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
       propertyPath: sounds.Array.data[0].volume
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
+      propertyPath: sounds.Array.data[1].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
+      propertyPath: sounds.Array.data[2].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108147330268660991, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
+      propertyPath: sounds.Array.data[3].volume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2661979335065970643, guid: b7fd5af80f46f9f4eae8da856cdc43c4, type: 3}
@@ -4758,19 +4818,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: -0.3714805
+      value: -0.49173552
       objectReference: {fileID: 0}
     - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: -0.55058366
+      value: -0.49264705
       objectReference: {fileID: 0}
     - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 1.7438693
+      value: 1.983471
       objectReference: {fileID: 0}
     - target: {fileID: 1545539742441371317, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 2.1011672
+      value: 1.9852941
       objectReference: {fileID: 0}
     - target: {fileID: 3937061271283314606, guid: f93286cd4e975ed4996ddd22b3b585a2, type: 3}
       propertyPath: m_LocalPosition.x
