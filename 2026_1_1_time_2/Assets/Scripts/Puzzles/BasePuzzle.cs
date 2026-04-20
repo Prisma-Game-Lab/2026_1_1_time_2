@@ -11,16 +11,15 @@ public abstract class BasePuzzle : MonoBehaviour
     [Header("Base Puzzle Events")]
     [SerializeField] private UnityEvent OnEnable;
     [SerializeField] private UnityEvent OnDisable;
-
-    [SerializeField] private PlayerMovement player;
+    [SerializeField] private UnityEvent OnCompletion;
 
     protected bool completed;
 
     public virtual void EnablePuzzle() 
     {
         OnEnable.Invoke();
-        if (player != null)
-            player.enabled = false;
+        GameObject player = GameManager.instance.GetPlayer();
+        player.GetComponent<PlayerController>().SetMovement(false);
         //Time.timeScale = 0f;
         CameraController.FollowMouse();
     }
@@ -28,8 +27,8 @@ public abstract class BasePuzzle : MonoBehaviour
     public virtual void DisablePuzzle()
     {
         OnDisable.Invoke();
-        if (player != null)
-            player.enabled = true;
+        GameObject player = GameManager.instance.GetPlayer();
+        player.GetComponent<PlayerController>().SetMovement(true);
         //Time.timeScale = 1f;
         CameraController.FollowPlayer();
     }
@@ -57,7 +56,7 @@ public abstract class BasePuzzle : MonoBehaviour
     {
         print("Correct Solution");
         completed = true;
-        PuzzleManager.OnPuzzleCompleted();
+        OnCompletion.Invoke();
         DisablePuzzle();
     }
 
