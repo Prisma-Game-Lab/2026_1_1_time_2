@@ -349,81 +349,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131966126}
   m_CullTransparentMesh: 1
---- !u!1 &132900017
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 132900019}
-  - component: {fileID: 132900018}
-  m_Layer: 0
-  m_Name: PuzzleManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &132900018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 132900017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cfa7e09d6fc6bb46ab448729e2c8374, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nPuzzles: 2
-  puzzleCompletedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2069171556}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 178645152}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  allPuzzleCompletedEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!4 &132900019
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 132900017}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 432.7618, y: 277.72183, z: 2.9840653}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &166094372
 GameObject:
   m_ObjectHideFlags: 0
@@ -2836,7 +2761,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  player: {fileID: 1954693642}
+  OnCompletion:
+    m_PersistentCalls:
+      m_Calls: []
   slot1: {fileID: 260926250}
   slot2: {fileID: 895544249}
   correctItem1: Item2
@@ -4032,17 +3959,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4153677969520330040, guid: 7b68ab5f2655a744493326429005503f, type: 3}
   m_PrefabInstance: {fileID: 837621071}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1954693642 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5765157444583960385, guid: 7b68ab5f2655a744493326429005503f, type: 3}
-  m_PrefabInstance: {fileID: 837621071}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954693640}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba3f8a9d40f453843bbb330bab773350, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1965714065
 GameObject:
   m_ObjectHideFlags: 0
@@ -4836,7 +4752,6 @@ SceneRoots:
   - {fileID: 260552592}
   - {fileID: 1439099955}
   - {fileID: 6313418599479270657}
-  - {fileID: 132900019}
   - {fileID: 1898616986}
   - {fileID: 1047651368}
   - {fileID: 219604647}
