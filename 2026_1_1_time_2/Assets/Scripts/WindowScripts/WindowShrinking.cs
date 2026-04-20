@@ -117,6 +117,7 @@ public class WindowShrinking : MonoBehaviour
         shrinkingModifier = deathShrinkingModifier;
         print(deathMinWindowSize);
         GameWindowManager.SetMinWindowSize(deathMinWindowSize);
+        AudioManager.Instance.Play("Morreu");
 
         GameWindowManager.instance.OnWindowMinSizeReached.RemoveListener(ActivateDeathShrinking);
         GameWindowManager.instance.OnWindowMinSizeReached.AddListener(OnWindowDeath);

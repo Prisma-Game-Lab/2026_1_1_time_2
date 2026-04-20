@@ -5,6 +5,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
 {
     public string slotType; // "Head", "Body", "Feet"
     public DraggableItem currentItem;
+    [SerializeField] bool scales = false;
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -22,7 +23,15 @@ public class DropSlot : MonoBehaviour, IDropHandler
             item.transform.localPosition = Vector3.zero;
 
             currentItem = item;
-            item.currentSlot = this; 
+            item.currentSlot = this;
+            if (scales)
+            {
+                AudioManager.Instance.Play("Balanca1");
+            }
+            else
+            {
+                AudioManager.Instance.Play("QuebraCabeca");
+            }
         }
     }
 

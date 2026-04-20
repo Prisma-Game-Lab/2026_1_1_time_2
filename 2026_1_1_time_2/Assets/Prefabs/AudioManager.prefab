@@ -51,10 +51,40 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  - name: Intro
-    clip: {fileID: 8300000, guid: 2ed93bdfe0c89b44abb74135efa1c418, type: 3}
-    volume: 0
-    pitch: 0
+  - name: Passos
+    clip: {fileID: 8300000, guid: 4698c8b829682b441b7a19b73a58fede, type: 3}
+    volume: 1
+    pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: Morreu
+    clip: {fileID: 8300000, guid: 6a392d55b728bda4a9a936c2fc328b09, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Agua
+    clip: {fileID: 8300000, guid: e12a07da48c34734ebe0f0d5deaa1aa6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Balanca1
+    clip: {fileID: 8300000, guid: 1e265811ac343e94b917ff6f935dab55, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: QuebraCabeca
+    clip: {fileID: 8300000, guid: 12446eb5838dd674d9dc452bd382614d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Valvula
+    clip: {fileID: 8300000, guid: 1597b98b935eaf14294293ef62b64973, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
   skip_intro: 1

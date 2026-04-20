@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.TerrainTools;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private float minTurnMagnitude;
     private Vector2 movement;
+    private bool passos = false;
 
     private void Start()
     {
@@ -25,7 +27,20 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (pc.canMove)
+        {
             rb.velocity = movement.normalized * speed;
+            if (movement.normalized.magnitude == 0f)
+            {
+                AudioManager.Instance.Stop("Passos");
+                passos = false;
+            }
+            else
+            {
+                if (!passos)
+                    AudioManager.Instance.Play("Passos");
+                passos = true;
+            }
+        }
     }
 
     private void GetMovementInput() 
@@ -36,15 +51,16 @@ public class PlayerMovement : MonoBehaviour
         if (!pc.canMove)
             return;
 
-        if (movement.magnitude > minTurnMagnitude) 
+        if (movement.magnitude > minTurnMagnitude)
         {
-            if (Mathf.Abs(movement.x) > Mathf.Abs(movement.y)) 
+            
+            if (Mathf.Abs(movement.x) > Mathf.Abs(movement.y))
             {
-                if (movement.x > 0) 
+                if (movement.x > 0)
                 {
                     pc.SetFacingDir(Vector2.right);
                 }
-                else 
+                else
                 {
                     pc.SetFacingDir(Vector2.left);
                 }

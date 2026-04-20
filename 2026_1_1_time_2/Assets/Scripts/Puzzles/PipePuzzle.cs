@@ -24,7 +24,7 @@ public class PipePuzzle : BasePuzzle
                 return false;
             }
         }
-
+        AudioManager.Instance.Play("Agua");
         return true;
     }
 }
@@ -58,10 +58,17 @@ public class ValveCategory
     public void OnValveActivated() 
     {
         currentActivatedValves++;
+        PlayValveSound();
     }
 
     public void OnValveDeactivated()
     {
         currentActivatedValves--;
+        PlayValveSound();
+    }
+
+    public void PlayValveSound()
+    {
+        AudioManager.Instance.Play("Valvula");
     }
 }
