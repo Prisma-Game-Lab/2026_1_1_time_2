@@ -5,6 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Vector2 facingVector = Vector2.down;
+    public bool canMove { get; private set; } = true;
+
+    public void SetMovement(bool value) 
+    {
+        canMove = value;
+    }
 
     public Vector2 GetFacingDir() 
     {

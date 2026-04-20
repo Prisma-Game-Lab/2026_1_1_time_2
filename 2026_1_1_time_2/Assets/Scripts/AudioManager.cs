@@ -90,4 +90,9 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
+
+    public float GetMasterVolume() 
+    {
+        return masterVolume;
+    }
 }

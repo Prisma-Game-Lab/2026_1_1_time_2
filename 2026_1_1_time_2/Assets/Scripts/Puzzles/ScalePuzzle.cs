@@ -74,7 +74,6 @@ public class ScalePuzzle : BasePuzzle
     {
         yield return new WaitForSeconds(3f);
 
-        PuzzleManager.OnPuzzleCompleted();
         DisablePuzzle();
     }
 }

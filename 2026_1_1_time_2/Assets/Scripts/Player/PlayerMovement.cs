@@ -24,7 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = movement.normalized * speed;
+        if (pc.canMove)
+            rb.velocity = movement.normalized * speed;
     }
 
     private void GetMovementInput() 
@@ -32,7 +33,10 @@ public class PlayerMovement : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        if (movement.x != 0 || movement.y != 0)
+        if (!pc.canMove)
+            return;
+
+        if (movement.magnitude > minTurnMagnitude) 
         {
             AudioManager.Instance.Play("Passos");
         }
