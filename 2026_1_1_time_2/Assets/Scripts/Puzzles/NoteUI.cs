@@ -6,6 +6,7 @@ public class NoteUI : MonoBehaviour
 
     public void OpenNote()
     {
+        AudioManager.Instance.Play("Papel");
         notePanel.SetActive(true);
     }
 
