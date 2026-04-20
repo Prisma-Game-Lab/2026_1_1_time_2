@@ -81,4 +81,10 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Valvula
+    clip: {fileID: 8300000, guid: 1597b98b935eaf14294293ef62b64973, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   skip_intro: 1
