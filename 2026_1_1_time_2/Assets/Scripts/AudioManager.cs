@@ -46,7 +46,7 @@ public class AudioManager : MonoBehaviour
             s.source.playOnAwake = false;
         }
         SetMasterVolume(0.5f);
-        if (skip_intro) Play("Main Loop");
+        if (skip_intro) Play("Main Loop", false);
     }
 
     public void Play(string name, bool randpitch = true)

@@ -37,6 +37,14 @@ public class CloseUpManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown("escape")) 
+        {
+            Close();
+        }
+    }
+
     public void Open(string name) 
     {
         if (closeUpDict.TryGetValue(name, out GameObject value))

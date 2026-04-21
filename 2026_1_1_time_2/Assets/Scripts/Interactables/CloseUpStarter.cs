@@ -8,7 +8,6 @@ public class CloseUpStarter : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        print("Open closeUp");
         CloseUpManager.instance.Open(closeUp.name);
     }
 }

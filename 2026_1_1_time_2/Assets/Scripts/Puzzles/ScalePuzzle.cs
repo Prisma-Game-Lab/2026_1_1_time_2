@@ -73,7 +73,6 @@ public class ScalePuzzle : BasePuzzle
     IEnumerator WinSequence()
     {
         yield return new WaitForSeconds(3f);
-
-        DisablePuzzle();
+        base.CorrectSolution();
     }
 }

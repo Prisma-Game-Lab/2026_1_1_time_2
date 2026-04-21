@@ -54,7 +54,6 @@ public abstract class BasePuzzle : MonoBehaviour
 
     protected virtual void CorrectSolution() 
     {
-        print("Correct Solution");
         completed = true;
         OnCompletion.Invoke();
         DisablePuzzle();
@@ -62,8 +61,6 @@ public abstract class BasePuzzle : MonoBehaviour
 
     protected virtual void IncorrectSolution() 
     {
-        print("Incorrect Solution");
-
         if (shrinkValueOnError != Vector2Int.zero) 
         {
             Vector2Int windowSize = GameWindowManager.GetWindowSize();
