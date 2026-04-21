@@ -255,6 +255,11 @@ public class GameWindowManager : MonoBehaviour
         return instance.defaultWindowSize;
     }
 
+    public static Vector2Int GetMinWindowSize()
+    {
+        return instance.minWindowSize;
+    }
+
     public static void SetMinWindowSize(Vector2Int minWindowSize)
     {
         instance.minWindowSize = minWindowSize;

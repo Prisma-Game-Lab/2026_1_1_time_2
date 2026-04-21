@@ -9,8 +9,9 @@ public class WindowShrinking : MonoBehaviour
     [SerializeField] private bool setSizeOnAwake;
 
     [Header("Variables")]
+    [SerializeField] private float closeMinutes;
     [SerializeField] private Vector2Int startWindowSize;
-    [SerializeField] private Vector2Int shrinkingModifier;
+    private Vector2Int shrinkingModifier;
     [SerializeField] private float shrinkUnitTime;
     [SerializeField] private Vector2Int deathMinWindowSize;
     [SerializeField] private Vector2Int deathShrinkingModifier;
@@ -33,6 +34,8 @@ public class WindowShrinking : MonoBehaviour
         {
             GameWindowManager.SetWindowSize(startWindowSize.x, startWindowSize.y);
         }
+
+        CalculateShrinkModifier();
 
         if (startOnAwake)
         {
@@ -88,6 +91,15 @@ public class WindowShrinking : MonoBehaviour
             return;
 
         paused = state;
+    }
+
+    private void CalculateShrinkModifier() 
+    {
+        Vector2Int screenDelta = GameWindowManager.GetScreenSize() - GameWindowManager.GetMinWindowSize();
+        Vector2 shrinkUnit = ((Vector2)screenDelta * shrinkUnitTime) / (closeMinutes * 60);
+        Vector2 transformedDelta = (shrinkUnit / 2);
+        Vector2Int roundedUnit = new Vector2Int(2 * Mathf.RoundToInt(transformedDelta.x), 2 * Mathf.RoundToInt(transformedDelta.y));
+        shrinkingModifier = new Vector2Int(Mathf.Max(roundedUnit.x, 2), Mathf.Max(roundedUnit.y, 2));
     }
 
     private void ShrinkingStep() 

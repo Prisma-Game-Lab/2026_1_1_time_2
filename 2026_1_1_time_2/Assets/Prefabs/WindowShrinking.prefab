@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2973e16afd7e2b74ba51f8e04ec3579a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startOnAwake: 1
+  startOnAwake: 0
   setSizeOnAwake: 0
+  closeMinutes: 10
   startWindowSize: {x: 0, y: 0}
-  shrinkingModifier: {x: 60, y: 30}
-  shrinkUnitTime: 2
+  shrinkUnitTime: 3
   deathMinWindowSize: {x: 100, y: 100}
   deathShrinkingModifier: {x: 80, y: 40}
   deathShrinkUnitTime: 0.5

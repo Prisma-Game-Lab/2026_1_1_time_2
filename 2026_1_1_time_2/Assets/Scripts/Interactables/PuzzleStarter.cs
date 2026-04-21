@@ -9,7 +9,6 @@ public class PuzzleStarter : MonoBehaviour, IInteractable
 
     public void Interact() 
     {
-        print("Started Puzzle");
         OnInteraction.Invoke();
     }
 }
