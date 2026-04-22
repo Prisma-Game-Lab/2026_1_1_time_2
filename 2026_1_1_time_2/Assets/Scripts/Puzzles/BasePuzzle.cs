@@ -15,6 +15,14 @@ public abstract class BasePuzzle : MonoBehaviour
 
     protected bool completed;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown("escape"))
+        {
+            DisablePuzzle();
+        }
+    }
+
     public virtual void EnablePuzzle() 
     {
         OnEnable.Invoke();
