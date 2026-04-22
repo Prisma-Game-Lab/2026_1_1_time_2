@@ -53,9 +53,9 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Passos
     clip: {fileID: 8300000, guid: 4698c8b829682b441b7a19b73a58fede, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
-    loop: 1
+    loop: 0
     source: {fileID: 0}
   - name: Morreu
     clip: {fileID: 8300000, guid: 6a392d55b728bda4a9a936c2fc328b09, type: 3}

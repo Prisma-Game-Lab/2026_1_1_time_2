@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-    private Vector2 facingVector = Vector2.down;
+    [SerializeField] private UnityEvent<PlayerState> OnPlayerStateChange;
+
+    public PlayerState currentState { get; private set; } = PlayerState.Idle;
     public bool canMove { get; private set; } = true;
+
+    private Vector2 facingVector = Vector2.down;
 
     public void SetMovement(bool value) 
     {
@@ -21,4 +26,17 @@ public class PlayerController : MonoBehaviour
     {
         this.facingVector = facingVector;
     }
+
+    public void SetCurrentState(PlayerState playerState) 
+    {
+        if (currentState == playerState)
+            return;
+        currentState = playerState;
+        OnPlayerStateChange.Invoke(currentState);
+    }
+}
+
+public enum PlayerState 
+{
+    Idle, Walking, Blocked
 }

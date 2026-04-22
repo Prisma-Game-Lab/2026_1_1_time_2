@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Rendering;
 using UnityEngine.TerrainTools;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Variables")]
     [SerializeField] private float speed = 5f;
     [SerializeField] private float minTurnMagnitude;
+    [SerializeField] private float minWalkSpeed;
+
     private Vector2 movement;
     private bool passos = false;
 
@@ -29,17 +33,33 @@ public class PlayerMovement : MonoBehaviour
         if (pc.canMove)
         {
             rb.velocity = movement.normalized * speed;
-            if (movement.normalized.magnitude == 0f)
+
+            if (rb.velocity.magnitude > minWalkSpeed)
             {
-                AudioManager.Instance.Stop("Passos");
-                passos = false;
+                if (pc.currentState != PlayerState.Walking)
+                {
+                    pc.SetCurrentState(PlayerState.Walking);
+                }
             }
-            else
+            else 
             {
-                if (!passos)
-                    AudioManager.Instance.Play("Passos");
-                passos = true;
+                if (pc.currentState != PlayerState.Idle)
+                {
+                    pc.SetCurrentState(PlayerState.Idle);
+                }
             }
+
+            //if (movement.normalized.magnitude == 0f)
+            //{
+            //    AudioManager.Instance.Stop("Passos");
+            //    passos = false;
+            //}
+            //else
+            //{
+            //    if (!passos)
+            //        AudioManager.Instance.Play("Passos");
+            //    passos = true;
+            //}
         }
     }
 
@@ -53,7 +73,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (movement.magnitude > minTurnMagnitude)
         {
-            
             if (Mathf.Abs(movement.x) > Mathf.Abs(movement.y))
             {
                 if (movement.x > 0)

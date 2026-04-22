@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5750084247282753641}
   - component: {fileID: 7422997846352063147}
   - component: {fileID: 4905604912371080622}
+  - component: {fileID: 202076707524459143}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -106,6 +107,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &202076707524459143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501130386635613827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd1cf511b15695f4d88abd55545a4e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 4905604912371080622}
 --- !u!1 &4153677969520330040
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,6 +241,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f236004144257944aff41cf7ec936f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPlayerStateChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 202076707524459143}
+        m_TargetAssemblyTypeName: PlayerAnimation, Assembly-CSharp
+        m_MethodName: OnPlayerStateChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5765157444583960385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +271,7 @@ MonoBehaviour:
   pc: {fileID: 8031217627104151637}
   speed: 3
   minTurnMagnitude: 0.1
+  minWalkSpeed: 0
 --- !u!114 &6732938486998215866
 MonoBehaviour:
   m_ObjectHideFlags: 0
