@@ -14,7 +14,7 @@ public class Menu : MonoBehaviour
     public void Start()
     {
         GameObject player = GameManager.instance.GetPlayer();
-        player.GetComponent<PlayerController>().SetMovement(false);
+        player.GetComponent<PlayerController>().BlockMovement();
 
         canvas.SetActive(true);
     }
@@ -45,7 +45,7 @@ public class Menu : MonoBehaviour
         canvas.SetActive(false);
 
         GameObject player = GameManager.instance.GetPlayer();
-        player.GetComponent<PlayerController>().SetMovement(true);
+        player.GetComponent<PlayerController>().AllowMovement();
 
         win.StartShrinking();
     }

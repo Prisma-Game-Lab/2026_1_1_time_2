@@ -65,6 +65,11 @@ public class CloseUpManager : MonoBehaviour
             GameObject nextCloseUp = closeUpStack.Pop();
             OpenSimple(nextCloseUp);
         }
+        else 
+        {
+            CameraController.FollowPlayer();
+            GameManager.instance.GetPlayer().GetComponent<PlayerController>().AllowMovement();
+        }
     }
 
     private void OpenSimple(GameObject closeUp) 
@@ -75,6 +80,11 @@ public class CloseUpManager : MonoBehaviour
                 return;
             closeUpStack.Push(currentCloseUp);
             CloseSimple();
+        }
+        else 
+        {
+            CameraController.FollowMouse();
+            GameManager.instance.GetPlayer().GetComponent<PlayerController>().BlockMovement();
         }
 
         currentCloseUp = closeUp;

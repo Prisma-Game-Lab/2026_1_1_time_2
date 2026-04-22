@@ -8,13 +8,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private UnityEvent<PlayerState> OnPlayerStateChange;
 
     public PlayerState currentState { get; private set; } = PlayerState.Idle;
-    public bool canMove { get; private set; } = true;
 
     private Vector2 facingVector = Vector2.down;
 
-    public void SetMovement(bool value) 
+    public void AllowMovement() 
     {
-        canMove = value;
+        SetCurrentState(PlayerState.Idle);
+    }
+
+    public void BlockMovement() 
+    {
+        SetCurrentState(PlayerState.Blocked);
     }
 
     public Vector2 GetFacingDir() 

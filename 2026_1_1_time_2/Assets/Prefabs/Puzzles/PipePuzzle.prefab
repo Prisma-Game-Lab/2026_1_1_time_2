@@ -1375,7 +1375,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   categories:
-  - amountNeeded: 1
+  - amountNeeded: 3
     valves:
     - {fileID: 5735624324232473734}
     - {fileID: 63700566630718083}
@@ -2959,6 +2959,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7009954786908935787}
     m_Modifications:
+    - target: {fileID: 2255576811397975405, guid: b7e9122e5862f1e4ab659d2be0758655, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7400490396988677060}
     - target: {fileID: 8838330954633077431, guid: b7e9122e5862f1e4ab659d2be0758655, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

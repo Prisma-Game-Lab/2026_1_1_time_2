@@ -1,7 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Rendering;
-using UnityEngine.TerrainTools;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,8 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float minTurnMagnitude;
     [SerializeField] private float minWalkSpeed;
 
-    private Vector2 movement;
-    private bool passos = false;
+    private Vector2 moveInput;
 
     private void Start()
     {
@@ -30,52 +28,34 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (pc.canMove)
+        switch (pc.currentState) 
         {
-            rb.velocity = movement.normalized * speed;
-
-            if (rb.velocity.magnitude > minWalkSpeed)
-            {
-                if (pc.currentState != PlayerState.Walking)
-                {
+            case PlayerState.Idle:
+                rb.velocity = moveInput.normalized * speed;
+                if (rb.velocity.magnitude > minWalkSpeed)
                     pc.SetCurrentState(PlayerState.Walking);
-                }
-            }
-            else 
-            {
-                if (pc.currentState != PlayerState.Idle)
-                {
+                break;
+            case PlayerState.Walking:
+                rb.velocity = moveInput.normalized * speed;
+                if (rb.velocity.magnitude <= minWalkSpeed)
                     pc.SetCurrentState(PlayerState.Idle);
-                }
-            }
-
-            //if (movement.normalized.magnitude == 0f)
-            //{
-            //    AudioManager.Instance.Stop("Passos");
-            //    passos = false;
-            //}
-            //else
-            //{
-            //    if (!passos)
-            //        AudioManager.Instance.Play("Passos");
-            //    passos = true;
-            //}
+                break;
         }
     }
 
     private void GetMovementInput() 
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        moveInput.x = Input.GetAxisRaw("Horizontal");
+        moveInput.y = Input.GetAxisRaw("Vertical");
 
-        if (!pc.canMove)
+        if (pc.currentState == PlayerState.Blocked)
             return;
 
-        if (movement.magnitude > minTurnMagnitude)
+        if (moveInput.magnitude > minTurnMagnitude)
         {
-            if (Mathf.Abs(movement.x) > Mathf.Abs(movement.y))
+            if (Mathf.Abs(moveInput.x) > Mathf.Abs(moveInput.y))
             {
-                if (movement.x > 0)
+                if (moveInput.x > 0)
                 {
                     pc.SetFacingDir(Vector2.right);
                 }
@@ -86,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                if (movement.y > 0)
+                if (moveInput.y > 0)
                 {
                     pc.SetFacingDir(Vector2.up);
                 }

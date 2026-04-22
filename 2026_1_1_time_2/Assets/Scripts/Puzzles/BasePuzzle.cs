@@ -27,8 +27,7 @@ public abstract class BasePuzzle : MonoBehaviour
     {
         OnEnable.Invoke();
         GameObject player = GameManager.instance.GetPlayer();
-        player.GetComponent<PlayerController>().SetMovement(false);
-        //Time.timeScale = 0f;
+        player.GetComponent<PlayerController>().BlockMovement();
         CameraController.FollowMouse();
     }
 
@@ -36,8 +35,7 @@ public abstract class BasePuzzle : MonoBehaviour
     {
         OnDisable.Invoke();
         GameObject player = GameManager.instance.GetPlayer();
-        player.GetComponent<PlayerController>().SetMovement(true);
-        //Time.timeScale = 1f;
+        player.GetComponent<PlayerController>().AllowMovement();
         CameraController.FollowPlayer();
     }
 
