@@ -2230,7 +2230,7 @@ MonoBehaviour:
   m_LightType: 1
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.45
-  m_Color: {r: 0.23113209, g: 0.50436616, b: 1, a: 1}
+  m_Color: {r: 0.93725497, g: 0.92549026, b: 0.7960785, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -3073,7 +3073,7 @@ MonoBehaviour:
   m_LightType: 1
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.45
-  m_Color: {r: 0.23113209, g: 0.50436616, b: 1, a: 1}
+  m_Color: {r: 0.93725497, g: 0.92549026, b: 0.7960785, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
