@@ -71,6 +71,8 @@ public class CloseUpManager : MonoBehaviour
     {
         if (currentCloseUp != null) 
         {
+            if (currentCloseUp == closeUp)
+                return;
             closeUpStack.Push(currentCloseUp);
             CloseSimple();
         }
