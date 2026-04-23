@@ -58,7 +58,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: Morreu
-    clip: {fileID: 8300000, guid: 6a392d55b728bda4a9a936c2fc328b09, type: 3}
+    clip: {fileID: 8300000, guid: 5670b440d04d03b44ae0728fc22f1351, type: 3}
     volume: 1
     pitch: 1
     loop: 0
